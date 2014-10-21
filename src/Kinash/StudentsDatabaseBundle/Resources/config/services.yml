@@ -1,0 +1,3 @@
+services:
+   students_database.path_generator:
+        class: Kinash\StudentsDatabaseBundle\Service\PathGenerator

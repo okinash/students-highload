@@ -1,0 +1,16 @@
+Kinash\StudentsDatabaseBundle\Entity\Student:
+    student{1..5000}:
+        name: <firstName()> <lastName()>
+        description: <text(500)>
+    student{5001..10000}:
+            name: <firstName()> <lastName()>
+            description: <text(500)>
+    student{10001..15000}:
+            name: <firstName()> <lastName()>
+            description: <text(500)>
+    student{15001..20000}:
+            name: <firstName()> <lastName()>
+            description: <text(500)>
+    student{20001..25000}:
+            name: <firstName()> <lastName()>
+            description: <text(500)>

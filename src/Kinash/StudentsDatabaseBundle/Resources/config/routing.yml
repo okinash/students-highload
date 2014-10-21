@@ -1,0 +1,7 @@
+students_database_homepage:
+    path:     /index
+    defaults: { _controller: StudentsDatabaseBundle:Default:index }
+
+students_database_detail:
+    path:     /detail/{path}
+    defaults: { _controller: StudentsDatabaseBundle:Default:detail }

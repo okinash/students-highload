@@ -1,0 +1,4 @@
+students_database:
+    resource: "@StudentsDatabaseBundle/Resources/config/routing.yml"
+    prefix:   /students
+
