@@ -1,11 +1,17 @@
-Homework3(partially ready)
+Homework3
 
-TODO::
 
-1)work on performance
+Quick guide:
 
-Time elapsed: 23.769 s
+1)composer install
 
-Memory usage: 19.730 Mb
+2)doctrine:database:create
 
-2)unit tests
+3)doctrine:fixtures:load
+
+4)php app/console studentsdatabase:path:generate
+
+
+5)for unit-tests use
+
+phpunit -c app
