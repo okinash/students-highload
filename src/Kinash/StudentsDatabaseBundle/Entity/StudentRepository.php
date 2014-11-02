@@ -12,8 +12,22 @@ use Doctrine\ORM\EntityRepository;
  */
 class StudentRepository extends EntityRepository
 {
+    /** First way using limit
+     * @param $limit
+     * @param $offset
+     * @return array
+     */
     public function getStudents($limit,$offset){
         return $this->findBy(array(), null, $limit, $offset);
     }
+
+    /**
+     * Second way - use doctrine iteration
+     * @return \Doctrine\ORM\Internal\Hydration\IterableResult
+     */
+    public function getIterator(){
+        return $this->createQueryBuilder('s')->select('s')->getQuery()->iterate();
+    }
+
 
 }

@@ -9,10 +9,13 @@ class PathGenerator{
      * @param string $name
      * @return string
      */
-    protected  function encodePath($name)
+    public   function encodePath($name)
     {
         $lowered = mb_strtolower($name);
         $path = preg_replace('/[^\da-z]/i', '_', $lowered);
+        while(strpos($path,'__')) {
+            $path = str_replace('__', '_', $path);
+        }
         return trim($path, '_');
     }
 

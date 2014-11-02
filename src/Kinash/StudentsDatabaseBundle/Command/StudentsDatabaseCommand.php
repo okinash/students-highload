@@ -44,11 +44,44 @@ class StudentsDatabaseCommand extends ContainerAwareCommand
         $em->flush();
     }
 
+
+    /**
+     * Alternative way - Generate unique path for all students using Iterator
+     */
+    protected function generatePathUsingIterator()
+    {
+        $pathGenerator = $this->getContainer()->get('students_database.path_generator');
+        $em =$this->getContainer()->get('doctrine.orm.entity_manager');
+        $em->getConnection()->getConfiguration()->setSQLLogger(null);
+        $repo = $em->getRepository('Kinash\StudentsDatabaseBundle\Entity\Student');
+        $studentsIterator = $repo->getIterator();
+        $i = 0;
+        foreach ($studentsIterator as $row) {
+            $student = $row[0];
+            $path = $pathGenerator->generateUniquePath($student->getName());
+            $student->setPath($path);
+            if (($i % self::BATCH_SIZE) === 0) {
+                $em->flush();
+                $em->clear();
+                gc_collect_cycles();
+            }
+            ++$i;
+        }
+        $em->flush();
+        $em->flush();
+    }
+
+
+
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $startTime = microtime(true);
 
-        $this->generatePath();
+        #first way - using limits - more expencive
+        #$this->generatePath();
+
+        //second way
+        $this->generatePathUsingIterator();
 
         $timeElapsed = microtime(true) - $startTime;
         $output->writeln(
